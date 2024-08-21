@@ -87,6 +87,7 @@ body {
 .main-nav-item {
 	text-decoration: none;
 	margin-right: 0.5rem;
+	text-wrap: nowrap;
 }
 
 .main-nav-item i {
@@ -505,6 +506,8 @@ body {
 }
 
 .transaction-total {
+	position: relative;
+	bottom: 1.7rem;
 	padding: 1rem;
 	display: flex;
 	flex-direction: column;
@@ -534,7 +537,7 @@ body {
 }
 
 .transaction-total-amount {
-	font-size: 2rem;
+	font-size: 2.3rem;
 	font-weight: 900;
 }
 

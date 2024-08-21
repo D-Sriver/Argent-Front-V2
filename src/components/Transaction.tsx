@@ -58,10 +58,10 @@ const Transaction: React.FC<TransactionProps> = ({
 					{description}
 				</span>
 				<span data-label="Montant" className="transaction-amount">
-					{amount.toFixed(2)} €
+					$ {amount.toFixed(2)}
 				</span>
 				<span data-label="Solde" className="transaction-balance">
-					{balance.toFixed(2)} €
+					$ {balance.toFixed(2)}
 				</span>
 			</div>
 			{isExpanded && (
