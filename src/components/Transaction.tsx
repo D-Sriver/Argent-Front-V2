@@ -1,16 +1,5 @@
 import React, { useState } from 'react';
-
-interface TransactionProps {
-	date: string;
-	description: string;
-	amount: number;
-	balance: number;
-	details: {
-		type: string;
-		category: string;
-		notes: string;
-	};
-}
+import { TransactionProps } from '../types/Transaction.types';
 
 const Transaction: React.FC<TransactionProps> = ({
 	date,
@@ -18,7 +7,7 @@ const Transaction: React.FC<TransactionProps> = ({
 	amount,
 	balance,
 	details,
-}) => {
+}: TransactionProps) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [isEditing, setIsEditing] = useState({
 		category: false,

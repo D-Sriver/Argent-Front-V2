@@ -3,7 +3,7 @@ import { mockTransactions } from '../mock/mockTransactions';
 import Transaction from './Transaction';
 import TransactionTotal from './TransactionTotal';
 
-const totalTransactions = 2082.79; // Montant fixe que vous souhaitez afficher
+const totalTransactions = 2082.79;
 
 interface Transaction {
 	amount: number;
