@@ -5,11 +5,6 @@ import TransactionTotal from './TransactionTotal';
 
 const totalTransactions = 2082.79;
 
-interface Transaction {
-	amount: number;
-	date: string;
-	description: string;
-}
 const TransactionList: React.FC = () => {
 	return (
 		<main className="main bg-dark">
