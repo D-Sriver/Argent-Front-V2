@@ -1,8 +1,18 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { fetchUserData } from '../api/Axios';
 import { accounts } from '../mock/mockUser';
 import { Account } from '../types/User.types';
 
 export default function User() {
+	useEffect(() => {
+		const storedEmail = localStorage.getItem('userEmail');
+		const storedPassword = localStorage.getItem('userPassword');
+		if (storedEmail && storedPassword) {
+			fetchUserData(storedEmail, storedPassword);
+		}
+	}, []);
+
 	return (
 		<>
 			<main className="main bg-dark">
