@@ -246,6 +246,27 @@ body {
 	color: white;
 }
 
+.error-message {
+	color: red;
+	font-weight: bold;
+	font-size: 1rem;
+	margin: 0.2rem;
+	opacity: 0;
+	transform: translateY(-10px);
+	animation: fadeInUp 0.3s ease forwards;
+}
+
+@keyframes fadeInUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.input-wrapper {
+	margin-bottom: 1rem;
+}
+
 .sign-in-button {
 	width: 100%;
 	padding: 8px;

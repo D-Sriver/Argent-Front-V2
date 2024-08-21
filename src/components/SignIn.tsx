@@ -1,22 +1,35 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserData } from '../api/Axios';
+import { validateEmail, validatePassword } from '../utils/validation';
 
 export default function SignIn() {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [emailError, setEmailError] = useState('');
+	const [passwordError, setPasswordError] = useState('');
 
 	const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		try {
-			await fetchUserData(email, password);
-			localStorage.setItem('userEmail', email);
-			localStorage.setItem('userPassword', password);
-			navigate('/user');
-		} catch (error) {
-			console.error('Erreur de connexion:', error);
-			// Ici, vous pourriez afficher un message d'erreur à l'utilisateur
+
+		const emailError = validateEmail(email);
+		const passwordError = validatePassword(password);
+
+		setEmailError(emailError);
+		setPasswordError(passwordError);
+
+		if (!emailError && !passwordError) {
+			try {
+				await fetchUserData(email, password);
+				localStorage.setItem('userEmail', email);
+				localStorage.setItem('userPassword', password);
+				navigate('/user');
+			} catch (error) {
+				console.error('Erreur de connexion:', error);
+				setEmailError('Email ou mot de passe incorrect');
+				setPasswordError('Email ou mot de passe incorrect');
+			}
 		}
 	};
 
@@ -34,6 +47,7 @@ export default function SignIn() {
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 						/>
+						{emailError && <p className="error-message">{emailError}</p>}
 					</div>
 					<div className="input-wrapper">
 						<label htmlFor="password">Password</label>
@@ -43,6 +57,7 @@ export default function SignIn() {
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
+						{passwordError && <p className="error-message">{passwordError}</p>}
 					</div>
 					<div className="input-remember">
 						<input type="checkbox" id="remember-me" />
