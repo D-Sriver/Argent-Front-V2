@@ -85,13 +85,27 @@ body {
 }
 
 .main-nav-item {
+	font-size: 1.1rem;
 	text-decoration: none;
 	margin-right: 0.5rem;
-	text-wrap: nowrap;
+}
+
+.main-nav-item:first-child i {
+	font-size: 1.3rem;
+	color: #9eadba;
+	padding: 10px;
+	border-radius: 50%;
+	background-color: #e0e6ee;
+}
+
+.main-nav-item:last-child i {
+	font-size: 1.5rem;
+	padding: 10px;
+	border-radius: 50%;
 }
 
 .main-nav-item i {
-	margin-right: 5px;
+	margin-right: 9px;
 }
 
 .main-nav-item:hover {
