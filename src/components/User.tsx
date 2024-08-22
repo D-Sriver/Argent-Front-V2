@@ -1,10 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchUserData } from '../api/Axios';
 import { accounts } from '../mock/mockUser';
 import { Account } from '../types/User.types';
 
 export default function User() {
+	const [firstName, setFirstName] = useState('Tony');
+	const [lastName, setLastName] = useState('Stark');
+	const [isEditing, setIsEditing] = useState(false);
+
 	useEffect(() => {
 		const storedEmail = localStorage.getItem('userEmail');
 		const storedPassword = localStorage.getItem('userPassword');
@@ -17,17 +21,49 @@ export default function User() {
 		<>
 			<main className="main bg-dark">
 				<div className="header">
-					<h1>Welcome back</h1>
-					<form className="edit-form">
-						<div className="edit-form-inputs">
-							<input type="text" placeholder="Prénom" />
-							<input type="text" placeholder="Nom" />
-						</div>
-						<div className="edit-form-buttons">
-							<button type="submit">Save</button>
-							<button type="button">Cancel</button>
-						</div>
-					</form>
+					<h1>
+						Welcome back
+						<br />
+						{firstName} {lastName}
+						{!isEditing && (
+							<button
+								className="edit-button"
+								onClick={() => setIsEditing(true)}
+							>
+								<i className="fa fa-pencil"></i>
+							</button>
+						)}
+					</h1>
+					{isEditing && (
+						<form
+							className="edit-form"
+							onSubmit={(e) => {
+								e.preventDefault();
+								setIsEditing(false);
+							}}
+						>
+							<div className="edit-form-inputs">
+								<input
+									type="text"
+									placeholder="Prénom"
+									value={firstName}
+									onChange={(e) => setFirstName(e.target.value)}
+								/>
+								<input
+									type="text"
+									placeholder="Nom"
+									value={lastName}
+									onChange={(e) => setLastName(e.target.value)}
+								/>
+							</div>
+							<div className="edit-form-buttons">
+								<button type="submit">Save</button>
+								<button type="button" onClick={() => setIsEditing(false)}>
+									Cancel
+								</button>
+							</div>
+						</form>
+					)}
 				</div>
 				<h2 className="sr-only">Accounts</h2>
 				{accounts.map((account: Account, index: number) => (
