@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserData } from '../api/Axios';
+import { setUser } from '../store/userSlice';
 import { validateEmail, validatePassword } from '../utils/validation';
 
 export default function SignIn() {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [emailError, setEmailError] = useState('');
@@ -21,7 +24,14 @@ export default function SignIn() {
 
 		if (!emailError && !passwordError) {
 			try {
-				await fetchUserData(email, password);
+				const userData = await fetchUserData(email, password);
+				dispatch(
+					setUser({
+						firstName: userData.firstName,
+						lastName: userData.lastName,
+						email: userData.email,
+					})
+				);
 				localStorage.setItem('userEmail', email);
 				localStorage.setItem('userPassword', password);
 				navigate('/user');
