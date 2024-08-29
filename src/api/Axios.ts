@@ -51,3 +51,41 @@ export const fetchUserData = async (email: string, password: string) => {
 		throw error;
 	}
 };
+
+export const updateUserData = async (
+	token: string,
+	userData: {
+		firstName: string;
+		lastName: string;
+	}
+) => {
+	try {
+		const response = await api.put('/user/profile', userData, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+		return response.data;
+	} catch (error) {
+		console.error('Erreur lors de la mise à jour du profil:', error);
+		throw error;
+	}
+};
+
+export const updateUserProfile = async (
+	token: string,
+	firstName: string,
+	lastName: string
+) => {
+	try {
+		const response = await api.put(
+			'/user/profile',
+			{ firstName, lastName },
+			{
+				headers: { Authorization: `Bearer ${token}` },
+			}
+		);
+		return response.data;
+	} catch (error) {
+		console.error('Erreur lors de la mise à jour du profil:', error);
+		throw error;
+	}
+};

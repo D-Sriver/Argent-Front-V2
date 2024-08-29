@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserData } from '../api/Axios';
+import { fetchUserData, login, updateUserProfile } from '../api/Axios';
 import { accounts } from '../mock/mockUser';
-import { Account } from '../types/User.types';
 import { RootState } from '../store/store';
-import { setUser, updateUserName } from '../store/userSlice';
+import { setUser } from '../store/userSlice';
+import { Account } from '../types/User.types';
 
 export default function User() {
 	const dispatch = useDispatch();
@@ -19,16 +19,31 @@ export default function User() {
 	useEffect(() => {
 		const storedEmail = localStorage.getItem('userEmail');
 		const storedPassword = localStorage.getItem('userPassword');
+		const storedFirstName = localStorage.getItem('userFirstName');
+		const storedLastName = localStorage.getItem('userLastName');
+
 		if (storedEmail && storedPassword && !isAuthenticated) {
-			fetchUserData(storedEmail, storedPassword).then((userData) => {
+			if (storedFirstName && storedLastName) {
 				dispatch(
 					setUser({
-						firstName: userData.firstName,
-						lastName: userData.lastName,
-						email: userData.email,
+						firstName: storedFirstName,
+						lastName: storedLastName,
+						email: storedEmail,
 					})
 				);
-			});
+			} else {
+				fetchUserData(storedEmail, storedPassword).then((userData) => {
+					dispatch(
+						setUser({
+							firstName: userData.firstName,
+							lastName: userData.lastName,
+							email: userData.email,
+						})
+					);
+					localStorage.setItem('userFirstName', userData.firstName);
+					localStorage.setItem('userLastName', userData.lastName);
+				});
+			}
 		}
 	}, [dispatch, isAuthenticated]);
 
@@ -38,11 +53,41 @@ export default function User() {
 		setEditedLastName(lastName);
 	};
 
-	const handleSave = () => {
-		dispatch(
-			updateUserName({ firstName: editedFirstName, lastName: editedLastName })
-		);
-		setIsEditing(false);
+	const handleSave = async () => {
+		try {
+			const storedEmail = localStorage.getItem('userEmail');
+			const storedPassword = localStorage.getItem('userPassword');
+
+			if (!storedEmail || !storedPassword) {
+				throw new Error("Informations d'authentification manquantes");
+			}
+
+			// Obtenir un nouveau token
+			const loginData = await login(storedEmail, storedPassword);
+			const token = loginData.body.token;
+
+			// Mettre à jour le profil utilisateur sur le serveur
+			await updateUserProfile(token, editedFirstName, editedLastName);
+
+			// Mettre à jour le state Redux et le localStorage
+			dispatch(
+				setUser({
+					firstName: editedFirstName,
+					lastName: editedLastName,
+					email: storedEmail,
+				})
+			);
+			localStorage.setItem('userFirstName', editedFirstName);
+			localStorage.setItem('userLastName', editedLastName);
+
+			console.log('Données utilisateur mises à jour avec succès');
+			setIsEditing(false);
+		} catch (error) {
+			console.error(
+				'Erreur lors de la mise à jour des données utilisateur:',
+				error
+			);
+		}
 	};
 
 	const handleCancel = () => {
