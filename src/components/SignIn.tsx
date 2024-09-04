@@ -34,7 +34,7 @@ export default function SignIn() {
 				);
 				localStorage.setItem('userEmail', email);
 				localStorage.setItem('userPassword', password);
-				navigate('/user');
+				navigate('/profile');
 			} catch (error) {
 				console.error('Erreur de connexion:', error);
 				setEmailError('Email ou mot de passe incorrect');
