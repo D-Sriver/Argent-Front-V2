@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserData } from '../../api/Axios';
@@ -12,6 +12,17 @@ export default function SignIn() {
 	const [password, setPassword] = useState('');
 	const [emailError, setEmailError] = useState('');
 	const [passwordError, setPasswordError] = useState('');
+	const [rememberMe, setRememberMe] = useState(false);
+
+	useEffect(() => {
+		const savedEmail = localStorage.getItem('userEmail');
+		const savedPassword = localStorage.getItem('userPassword');
+		if (savedEmail && savedPassword) {
+			setEmail(savedEmail);
+			setPassword(savedPassword);
+			setRememberMe(true);
+		}
+	}, []);
 
 	const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -32,8 +43,13 @@ export default function SignIn() {
 						email: userData.email,
 					})
 				);
-				localStorage.setItem('userEmail', email);
-				localStorage.setItem('userPassword', password);
+				if (rememberMe) {
+					localStorage.setItem('userEmail', email);
+					localStorage.setItem('userPassword', password);
+				} else {
+					localStorage.removeItem('userEmail');
+					localStorage.removeItem('userPassword');
+				}
 				navigate('/profile');
 			} catch (error) {
 				console.error('Erreur de connexion:', error);
@@ -70,7 +86,12 @@ export default function SignIn() {
 						{passwordError && <p className="error-message">{passwordError}</p>}
 					</div>
 					<div className="input-remember">
-						<input type="checkbox" id="remember-me" />
+						<input
+							type="checkbox"
+							id="remember-me"
+							checked={rememberMe}
+							onChange={(e) => setRememberMe(e.target.checked)}
+						/>
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
 					<button type="submit" className="sign-in-button">
