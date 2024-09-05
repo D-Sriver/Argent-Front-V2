@@ -1,5 +1,5 @@
 import React from 'react';
-import { TransactionTotalProps } from '../types/Transaction.types';
+import { TransactionTotalProps } from '../../types/Transaction.types';
 
 const TransactionTotal: React.FC<TransactionTotalProps> = ({ total }) => {
 	return (

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { RootState } from '../store/store';
-import { clearUser } from '../store/userSlice';
+import { RootState } from '../../store/store';
+import { clearUser } from '../../store/userSlice';
 
 export default function Header() {
 	const dispatch = useDispatch();

@@ -1,11 +1,11 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import SignIn from './components/auth/SignIn';
 import Home from './components/Home/Home';
+import Footer from './components/Layout/Footer';
+import Header from './components/Layout/Header';
 import NotFound from './components/NotFound';
-import ProtectedRoute from './components/ProtectedRoute';
-import SignIn from './components/SignIn';
-import TransactionList from './components/TransactionList';
+import TransactionList from './components/Transaction/TransactionList';
 import User from './components/User';
 
 export default function App() {

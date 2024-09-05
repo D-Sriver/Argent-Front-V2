@@ -1,5 +1,5 @@
 import React from 'react';
-import { mockTransactions } from '../mock/mockTransactions';
+import { mockTransactions } from '../../mock/mockTransactions';
 import Transaction from './Transaction';
 import TransactionTotal from './TransactionTotal';
 

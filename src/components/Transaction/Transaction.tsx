@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TransactionProps } from '../types/Transaction.types';
+import { TransactionProps } from '../../types/Transaction.types';
 
 const Transaction: React.FC<TransactionProps> = ({
 	date,

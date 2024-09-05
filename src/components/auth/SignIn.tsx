@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchUserData } from '../api/Axios';
-import { setUser } from '../store/userSlice';
-import { validateEmail, validatePassword } from '../utils/validation';
+import { fetchUserData } from '../../api/Axios';
+import { setUser } from '../../store/userSlice';
+import { validateEmail, validatePassword } from '../../utils/validation';
 
 export default function SignIn() {
 	const navigate = useNavigate();
