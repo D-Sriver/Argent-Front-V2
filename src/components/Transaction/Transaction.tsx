@@ -21,7 +21,8 @@ const Transaction: React.FC<TransactionProps> = ({
 
 	const handleSave = (field: 'category' | 'notes') => {
 		setIsEditing({ ...isEditing, [field]: false });
-		// Ici, vous implémenteriez la logique pour sauvegarder les modifications
+		// Mise à jour locale uniquement
+		setEditedDetails({ ...editedDetails, [field]: editedDetails[field] });
 	};
 
 	const handleCancel = (field: 'category' | 'notes') => {
@@ -55,7 +56,7 @@ const Transaction: React.FC<TransactionProps> = ({
 			</div>
 			{isExpanded && (
 				<div className="transaction-details">
-					<p>Type de transaction : {details.type}</p>
+					<p>Type de transaction : {editedDetails.type}</p>
 					<div className="editable-field">
 						<span>Catégorie : </span>
 						{isEditing.category ? (
@@ -77,7 +78,7 @@ const Transaction: React.FC<TransactionProps> = ({
 							</>
 						) : (
 							<>
-								<span>{details.category}</span>
+								<span>{editedDetails.category}</span>
 								<button
 									className="edit-button"
 									onClick={() => handleEdit('category')}
@@ -106,7 +107,7 @@ const Transaction: React.FC<TransactionProps> = ({
 							</>
 						) : (
 							<>
-								<span>{details.notes}</span>
+								<span>{editedDetails.notes}</span>
 								<button
 									className="edit-button"
 									onClick={() => handleEdit('notes')}
