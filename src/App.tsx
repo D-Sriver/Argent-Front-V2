@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import Footer from './components/Layout/Footer';
 import Header from './components/Layout/Header';
 import NotFound from './components/NotFound';
+import SwaggerUIComponent from './components/SwaggerUI';
 import TransactionList from './components/Transaction/TransactionList';
 import User from './components/User';
 
@@ -33,6 +34,7 @@ export default function App() {
 								</ProtectedRoute>
 							}
 						/>
+						<Route path="/doc-api" element={<SwaggerUIComponent />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</main>
