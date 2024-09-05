@@ -73,6 +73,40 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	padding: 5px 20px;
+	position: relative;
+}
+
+.burger-menu {
+	display: none;
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+
+@media (max-width: 640px) {
+	.burger-menu {
+		display: block;
+	}
+
+	.main-nav-item-block {
+		display: none;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		background-color: white;
+		flex-direction: column;
+		align-items: flex-start;
+		width: 200px;
+		padding: 1rem;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	}
+
+	.main-nav-item-block.open {
+		display: flex;
+	}
+
+	.main-nav-item {
+		margin-bottom: 1rem;
+	}
 }
 
 .main-nav a {
@@ -83,8 +117,8 @@ body {
 .main-nav a.router-link-exact-active {
 	color: #42b983;
 }
-
 .main-nav-item {
+	text-wrap: nowrap;
 	font-size: 1.1rem;
 	text-decoration: none;
 	margin-right: 0.5rem;

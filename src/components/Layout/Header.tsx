@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store/store';
@@ -8,6 +9,7 @@ export default function Header() {
 	const { firstName, isAuthenticated } = useSelector(
 		(state: RootState) => state.user
 	);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const handleLogout = () => {
 		dispatch(clearUser());
@@ -15,6 +17,11 @@ export default function Header() {
 		localStorage.removeItem('userPassword');
 		localStorage.removeItem('userFirstName');
 		localStorage.removeItem('userLastName');
+		setIsMenuOpen(false);
+	};
+
+	const toggleMenu = () => {
+		setIsMenuOpen(!isMenuOpen);
 	};
 
 	return (
@@ -27,10 +34,17 @@ export default function Header() {
 				/>
 				<h1 className="sr-only">Argent Bank</h1>
 			</Link>
-			<div>
+			<div className="burger-menu" onClick={toggleMenu}>
+				<i className="fas fa-bars"></i>
+			</div>
+			<div className={`main-nav-item-block ${isMenuOpen ? 'open' : ''}`}>
 				{isAuthenticated ? (
 					<>
-						<Link className="main-nav-item" to="/profile">
+						<Link
+							className="main-nav-item"
+							to="/profile"
+							onClick={() => setIsMenuOpen(false)}
+						>
 							<i className="fa fa-user-circle"></i>
 							{firstName}
 						</Link>
@@ -40,7 +54,11 @@ export default function Header() {
 						</Link>
 					</>
 				) : (
-					<Link className="main-nav-item" to="/sign-in">
+					<Link
+						className="main-nav-item"
+						to="/sign-in"
+						onClick={() => setIsMenuOpen(false)}
+					>
 						<i className="fa fa-user-circle"></i>
 						Se connecter
 					</Link>
