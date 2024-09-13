@@ -1,9 +1,9 @@
 swagger: '2.0'
 info:
-  title: Argent Bank API
-  description: API pour l'application front-end Argent Bank
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
   version: '1.0.0'
-  termsOfService: 'http://example.com/terms/'
+  termsOfService: 'http://swagger.io/terms/'
 host: localhost:3001
 basePath: /api/v1
 schemes:
@@ -12,249 +12,253 @@ paths:
   /user/login:
     post:
       tags:
-        - Authentification
-      summary: Connexion de l'utilisateur
-      description: Authentifie un utilisateur et renvoie un token JWT
+        - User Module
+      summary: User Login
+      description: Authenticate a user and return a token
       parameters:
         - in: body
-          name: credentials
-          description: Identifiants de l'utilisateur
+          name: body
+          description: Login Credentials
           required: true
           schema:
-            $ref: '#/definitions/LoginCredentials'
+            $ref: '#/definitions/Login'
+      produces:
+        - application/json
       responses:
         '200':
-          description: Connexion réussie
+          description: Login Successful
           schema:
             $ref: '#/definitions/LoginResponse'
         '400':
-          description: Identifiants invalides
+          description: Invalid Credentials
         '500':
-          description: Erreur serveur
-
-  /user/signup:
-    post:
-      tags:
-        - Authentification
-      summary: Inscription d'un nouvel utilisateur
-      description: Crée un nouveau compte utilisateur
-      parameters:
-        - in: body
-          name: userInfo
-          description: Informations du nouvel utilisateur
-          required: true
-          schema:
-            $ref: '#/definitions/SignUpCredentials'
-      responses:
-        '201':
-          description: Compte créé avec succès
-        '400':
-          description: Données invalides
-        '500':
-          description: Erreur serveur
-
+          description: Internal Server Error
   /user/profile:
-    get:
-      tags:
-        - Utilisateur
-      summary: Récupérer le profil de l'utilisateur
-      description: Récupère les informations du profil de l'utilisateur connecté
+    post:
       security:
-        - BearerAuth: []
+        - Bearer: []
+      tags:
+        - User Module
+      summary: Get User Profile
+      description: Retrieve the profile of the authenticated user
+      produces:
+        - application/json
       responses:
         '200':
-          description: Profil récupéré avec succès
+          description: User profile retrieved successfully
           schema:
             $ref: '#/definitions/UserProfile'
         '401':
-          description: Non autorisé
+          description: Unauthorized - Invalid or missing token
         '500':
-          description: Erreur serveur
+          description: Internal Server Error
     put:
-      tags:
-        - Utilisateur
-      summary: Mettre à jour le profil de l'utilisateur
-      description: Met à jour les informations du profil de l'utilisateur connecté
       security:
-        - BearerAuth: []
+        - Bearer: []
+      tags:
+        - User Module
+      summary: Update User Profile
+      description: Update the profile of the authenticated user
       parameters:
         - in: body
-          name: profileUpdate
-          description: Nouvelles informations du profil
+          name: body
+          description: Updated user information
           required: true
           schema:
-            $ref: '#/definitions/ProfileUpdate'
+            $ref: '#/definitions/UserProfileUpdate'
+      produces:
+        - application/json
       responses:
         '200':
-          description: Profil mis à jour avec succès
+          description: User profile updated successfully
           schema:
-            $ref: '#/definitions/UserProfile'
+            $ref: '#/definitions/ApiResponse'
         '400':
-          description: Données invalides
+          description: Invalid Fields
         '401':
-          description: Non autorisé
+          description: Unauthorized - Invalid or missing token
         '500':
-          description: Erreur serveur
-
-  /accounts:
+          description: Internal Server Error
+  /transactions:
     get:
-      tags:
-        - Comptes
-      summary: Récupérer les comptes de l'utilisateur
-      description: Récupère la liste des comptes de l'utilisateur connecté
       security:
-        - BearerAuth: []
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: List User Transactions
+      description: Retrieve a list of transactions for the authenticated user
+      produces:
+        - application/json
       responses:
         '200':
-          description: Comptes récupérés avec succès
+          description: Transactions retrieved successfully
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Account'
+            $ref: '#/definitions/TransactionsList'
         '401':
-          description: Non autorisé
+          description: Unauthorized - Invalid or missing token
         '500':
-          description: Erreur serveur
-
-  /accounts/{accountId}/transactions:
+          description: Internal Server Error
+  /transactions/{transactionId}:
     get:
-      tags:
-        - Transactions
-      summary: Récupérer les transactions d'un compte
-      description: Récupère la liste des transactions pour un compte spécifique
       security:
-        - BearerAuth: []
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Get Transaction Details
+      description: Retrieve details of a specific transaction
       parameters:
-        - in: path
-          name: accountId
+        - name: transactionId
+          in: path
+          description: ID of the transaction to retrieve
           required: true
           type: string
+      produces:
+        - application/json
       responses:
         '200':
-          description: Transactions récupérées avec succès
+          description: Transaction details retrieved successfully
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Transaction'
+            $ref: '#/definitions/Transaction'
         '401':
-          description: Non autorisé
+          description: Unauthorized - Invalid or missing token
         '404':
-          description: Compte non trouvé
+          description: Transaction not found
         '500':
-          description: Erreur serveur
-
-  /transactions/{transactionId}:
+          description: Internal Server Error
     put:
-      tags:
-        - Transactions
-      summary: Mettre à jour une transaction
-      description: Met à jour les détails d'une transaction spécifique
       security:
-        - BearerAuth: []
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Update Transaction
+      description: Update all fields of a specific transaction
       parameters:
-        - in: path
-          name: transactionId
+        - name: transactionId
+          in: path
+          description: ID of the transaction to update
           required: true
           type: string
         - in: body
-          name: transactionUpdate
-          description: Nouvelles informations de la transaction
+          name: body
+          description: Updated transaction information
           required: true
           schema:
             $ref: '#/definitions/TransactionUpdate'
+      produces:
+        - application/json
       responses:
         '200':
-          description: Transaction mise à jour avec succès
+          description: Transaction updated successfully
           schema:
             $ref: '#/definitions/Transaction'
         '400':
-          description: Données invalides
+          description: Invalid Fields
         '401':
-          description: Non autorisé
+          description: Unauthorized - Invalid or missing token
         '404':
-          description: Transaction non trouvée
+          description: Transaction not found
         '500':
-          description: Erreur serveur
+          description: Internal Server Error
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Partially Update Transaction
+      description: Update specific fields of a transaction (e.g., category or note)
+      parameters:
+        - name: transactionId
+          in: path
+          description: ID of the transaction to update
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Fields to update
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionPartialUpdate'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction partially updated successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Unauthorized - Invalid or missing token
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Delete Transaction
+      description: Delete a specific transaction
+      parameters:
+        - name: transactionId
+          in: path
+          description: ID of the transaction to delete
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: Transaction deleted successfully
+        '401':
+          description: Unauthorized - Invalid or missing token
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
 
 securityDefinitions:
-  BearerAuth:
+  Bearer:
     type: apiKey
     name: Authorization
     in: header
 
 definitions:
-  LoginCredentials:
+  Login:
     type: object
-    required:
-      - email
-      - password
     properties:
       email:
         type: string
-        format: email
+        description: User's email address
       password:
         type: string
-        format: password
-
-  SignUpCredentials:
-    type: object
+        description: User's password
     required:
       - email
       - password
-      - firstName
-      - lastName
-    properties:
-      email:
-        type: string
-        format: email
-      password:
-        type: string
-        format: password
-      firstName:
-        type: string
-      lastName:
-        type: string
-
   LoginResponse:
     type: object
     properties:
       token:
         type: string
-      user:
-        $ref: '#/definitions/UserProfile'
-
+        description: JWT token for authentication
   UserProfile:
     type: object
     properties:
-      id:
+      firstName:
+        type: string
+      lastName:
         type: string
       email:
         type: string
-      firstName:
-        type: string
-      lastName:
-        type: string
-
-  ProfileUpdate:
+  UserProfileUpdate:
     type: object
     properties:
       firstName:
         type: string
       lastName:
         type: string
-
-  Account:
-    type: object
-    properties:
-      id:
-        type: string
-      title:
-        type: string
-      balance:
-        type: number
-      description:
-        type: string
-
   Transaction:
     type: object
     properties:
@@ -262,24 +266,48 @@ definitions:
         type: string
       date:
         type: string
-        format: date
       description:
         type: string
       amount:
         type: number
       balance:
         type: number
-      type:
-        type: string
       category:
         type: string
-      notes:
+      note:
         type: string
-
+  TransactionsList:
+    type: array
+    items:
+      $ref: '#/definitions/Transaction'
   TransactionUpdate:
+    type: object
+    properties:
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: number
+      balance:
+        type: number
+      category:
+        type: string
+      note:
+        type: string
+  TransactionPartialUpdate:
     type: object
     properties:
       category:
         type: string
-      notes:
+      note:
         type: string
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
