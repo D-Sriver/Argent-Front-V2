@@ -72,6 +72,7 @@ export default function Login() {
 							id="email"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
+							autoComplete="username"
 						/>
 						{emailError && <p className="error-message">{emailError}</p>}
 					</div>
@@ -82,6 +83,7 @@ export default function Login() {
 							id="password"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
+							autoComplete="current-password"
 						/>
 						{passwordError && <p className="error-message">{passwordError}</p>}
 					</div>
