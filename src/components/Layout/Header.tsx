@@ -56,11 +56,11 @@ export default function Header() {
 				) : (
 					<Link
 						className="main-nav-item"
-						to="/sign-in"
+						to="/Login"
 						onClick={() => setIsMenuOpen(false)}
 					>
 						<i className="fa fa-user-circle"></i>
-						Sign In
+						Login
 					</Link>
 				)}
 			</div>

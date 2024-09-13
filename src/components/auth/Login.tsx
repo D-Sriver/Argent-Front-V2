@@ -5,7 +5,7 @@ import { fetchUserData } from '../../api/Axios';
 import { setUser } from '../../store/userSlice';
 import { validateEmail, validatePassword } from '../../utils/validation';
 
-export default function SignIn() {
+export default function Login() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState('');
@@ -63,7 +63,7 @@ export default function SignIn() {
 		<main className="main bg-dark">
 			<section className="sign-in-content">
 				<i className="fa fa-user-circle sign-in-icon"></i>
-				<h1>Sign In</h1>
+				<h1>Login</h1>
 				<form onSubmit={handleSignIn}>
 					<div className="input-wrapper">
 						<label htmlFor="email">Email</label>
