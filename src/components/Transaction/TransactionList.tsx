@@ -13,8 +13,8 @@ const TransactionList: React.FC = () => {
 				<span className="dropdown-arrow"></span>
 				<span className="transaction-date">Date</span>
 				<span className="transaction-description">Description</span>
-				<span className="transaction-amount">Montant</span>
-				<span className="transaction-balance">Solde</span>
+				<span className="transaction-amount">Amount</span>
+				<span className="transaction-balance">Balance</span>
 			</div>
 			<div className="transaction-container">
 				{mockTransactions.map((transaction, index) => (

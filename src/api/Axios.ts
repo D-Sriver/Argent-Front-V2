@@ -11,7 +11,7 @@ export const login = async (email: string, password: string) => {
 		const response = await api.post('/user/login', { email, password });
 		return response.data;
 	} catch (error) {
-		console.error('Erreur de connexion:', error);
+		console.error('Login error:', error);
 		throw error;
 	}
 };
@@ -27,7 +27,7 @@ export const getUserProfile = async (token: string) => {
 		);
 		return response.data;
 	} catch (error) {
-		console.error('Erreur lors de la récupération du profil:', error);
+		console.error('Error retrieving profile:', error);
 		throw error;
 	}
 };
@@ -44,10 +44,7 @@ export const fetchUserData = async (email: string, password: string) => {
 			lastName: profileData.body.lastName,
 		};
 	} catch (error) {
-		console.error(
-			'Erreur lors de la récupération des données utilisateur:',
-			error
-		);
+		console.error('Error retrieving user data:', error);
 		throw error;
 	}
 };
@@ -65,7 +62,7 @@ export const updateUserData = async (
 		});
 		return response.data;
 	} catch (error) {
-		console.error('Erreur lors de la mise à jour du profil:', error);
+		console.error('Error updating profile:', error);
 		throw error;
 	}
 };

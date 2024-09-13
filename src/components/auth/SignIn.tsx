@@ -52,9 +52,9 @@ export default function SignIn() {
 				}
 				navigate('/profile');
 			} catch (error) {
-				console.error('Erreur de connexion:', error);
-				setEmailError('Email ou mot de passe incorrect');
-				setPasswordError('Email ou mot de passe incorrect');
+				console.error('Login error:', error);
+				setEmailError('Incorrect email or password');
+				setPasswordError('Incorrect email or password');
 			}
 		}
 	};

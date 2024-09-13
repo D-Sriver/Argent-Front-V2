@@ -50,7 +50,7 @@ export default function Header() {
 						</Link>
 						<Link className="main-nav-item" to="/" onClick={handleLogout}>
 							<i className="fa fa-sign-out"></i>
-							Se déconnecter
+							Sign Out
 						</Link>
 					</>
 				) : (
@@ -60,7 +60,7 @@ export default function Header() {
 						onClick={() => setIsMenuOpen(false)}
 					>
 						<i className="fa fa-user-circle"></i>
-						Se connecter
+						Sign In
 					</Link>
 				)}
 			</div>

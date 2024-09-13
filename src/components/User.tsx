@@ -59,17 +59,17 @@ export default function User() {
 			const storedPassword = localStorage.getItem('userPassword');
 
 			if (!storedEmail || !storedPassword) {
-				throw new Error("Informations d'authentification manquantes");
+				throw new Error('Missing authentication information');
 			}
 
-			// Obtenir un nouveau token
+			// Get a new token
 			const loginData = await login(storedEmail, storedPassword);
 			const token = loginData.body.token;
 
-			// Mettre à jour le profil utilisateur sur le serveur
+			// Update user profile on the server
 			await updateUserProfile(token, editedFirstName, editedLastName);
 
-			// Mettre à jour le state Redux et le localStorage
+			// Update Redux state and localStorage
 			dispatch(
 				setUser({
 					firstName: editedFirstName,
@@ -80,13 +80,10 @@ export default function User() {
 			localStorage.setItem('userFirstName', editedFirstName);
 			localStorage.setItem('userLastName', editedLastName);
 
-			console.log('Données utilisateur mises à jour avec succès');
+			console.log('User data updated successfully');
 			setIsEditing(false);
 		} catch (error) {
-			console.error(
-				'Erreur lors de la mise à jour des données utilisateur:',
-				error
-			);
+			console.error('Error updating user data:', error);
 		}
 	};
 

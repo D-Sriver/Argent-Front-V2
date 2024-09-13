@@ -47,18 +47,18 @@ const Transaction: React.FC<TransactionProps> = ({
 				<span data-label="Description" className="transaction-description">
 					{description}
 				</span>
-				<span data-label="Montant" className="transaction-amount">
+				<span data-label="Amount" className="transaction-amount">
 					$ {amount.toFixed(2)}
 				</span>
-				<span data-label="Solde" className="transaction-balance">
+				<span data-label="Balance" className="transaction-balance">
 					$ {balance.toFixed(2)}
 				</span>
 			</div>
 			{isExpanded && (
 				<div className="transaction-details">
-					<p>Type de transaction : {editedDetails.type}</p>
+					<p>Type of transaction : {editedDetails.type}</p>
 					<div className="editable-field">
-						<span>Catégorie : </span>
+						<span>Category: </span>
 						{isEditing.category ? (
 							<>
 								<input
@@ -71,10 +71,8 @@ const Transaction: React.FC<TransactionProps> = ({
 										})
 									}
 								/>
-								<button onClick={() => handleSave('category')}>Valider</button>
-								<button onClick={() => handleCancel('category')}>
-									Annuler
-								</button>
+								<button onClick={() => handleSave('category')}>Save</button>
+								<button onClick={() => handleCancel('category')}>Cancel</button>
 							</>
 						) : (
 							<>
@@ -89,7 +87,7 @@ const Transaction: React.FC<TransactionProps> = ({
 						)}
 					</div>
 					<div className="editable-field">
-						<span>Notes : </span>
+						<span>Notes: </span>
 						{isEditing.notes ? (
 							<>
 								<input
@@ -102,8 +100,8 @@ const Transaction: React.FC<TransactionProps> = ({
 										})
 									}
 								/>
-								<button onClick={() => handleSave('notes')}>Valider</button>
-								<button onClick={() => handleCancel('notes')}>Annuler</button>
+								<button onClick={() => handleSave('notes')}>Save</button>
+								<button onClick={() => handleCancel('notes')}>Cancel</button>
 							</>
 						) : (
 							<>
