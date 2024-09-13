@@ -12,8 +12,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 	);
 
 	if (!isAuthenticated) {
-		// si l'utilisateur n'est pas authentifié, redirige vers la page de connexion
-		return <Navigate to="/Login" replace />;
+		// si l'utilisateur n'est pas authentifié, redirige vers la Home
+		return <Navigate to="/" />;
 	}
 
 	return <>{children}</>;
