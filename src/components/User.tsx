@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchUserData, login, updateUserProfile } from '../api/Axios';
+import { fetchUserData, updateUserProfile } from '../api/Axios';
 import { accounts } from '../mock/mockUser';
 import { RootState } from '../store/store';
 import { setUser } from '../store/userSlice';
@@ -55,35 +55,35 @@ export default function User() {
 
 	const handleSave = async () => {
 		try {
-			const storedEmail = localStorage.getItem('userEmail');
-			const storedPassword = localStorage.getItem('userPassword');
+			const token = localStorage.getItem('userToken');
 
-			if (!storedEmail || !storedPassword) {
-				throw new Error('Missing authentication information');
+			if (!token) {
+				console.error("Token d'authentification manquant");
+				return;
 			}
 
-			// Get a new token
-			const loginData = await login(storedEmail, storedPassword);
-			const token = loginData.body.token;
-
-			// Update user profile on the server
+			// Mettre à jour le profil de l'utilisateur sur le serveur
 			await updateUserProfile(token, editedFirstName, editedLastName);
 
-			// Update Redux state and localStorage
+			// Mettre à jour l'état Redux et le localStorage
 			dispatch(
 				setUser({
 					firstName: editedFirstName,
 					lastName: editedLastName,
-					email: storedEmail,
+					email: localStorage.getItem('userEmail') || '',
 				})
 			);
 			localStorage.setItem('userFirstName', editedFirstName);
 			localStorage.setItem('userLastName', editedLastName);
 
-			console.log('User data updated successfully');
+			console.log('Données utilisateur mises à jour avec succès');
 			setIsEditing(false);
 		} catch (error) {
-			console.error('Error updating user data:', error);
+			console.error(
+				'Erreur lors de la mise à jour des données utilisateur:',
+				error
+			);
+			// Gérer l'erreur (par exemple, afficher un message à l'utilisateur)
 		}
 	};
 

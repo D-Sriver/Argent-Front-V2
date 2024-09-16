@@ -42,6 +42,10 @@ export const fetchUserData = async (email: string, password: string) => {
 			...loginData,
 			firstName: profileData.body.firstName,
 			lastName: profileData.body.lastName,
+			email: profileData.body.email,
+			body: {
+				token: token,
+			},
 		};
 	} catch (error) {
 		console.error('Error retrieving user data:', error);

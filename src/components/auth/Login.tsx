@@ -43,6 +43,8 @@ export default function Login() {
 						email: userData.email,
 					})
 				);
+				// Stockez le token dans le localStorage
+				localStorage.setItem('userToken', userData.body.token);
 				if (rememberMe) {
 					localStorage.setItem('userEmail', email);
 					localStorage.setItem('userPassword', password);
