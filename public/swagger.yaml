@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
-  title: Bank Argent API documentation
-  description: Contains all available API endpoints in this codebase
+  title: Documentation de l'API Bank Argent
+  description: Contient tous les points de terminaison API disponibles dans cette base de code
   version: '1.0.0'
   termsOfService: 'http://swagger.io/terms/'
 host: localhost:3001
@@ -84,97 +84,63 @@ paths:
       security:
         - Bearer: []
       tags:
-        - Transaction Module
-      summary: List User Transactions
-      description: Retrieve a list of transactions for the authenticated user
+        - Module Transaction
+      summary: Liste des transactions de l'utilisateur
+      description: Récupère une liste des transactions pour l'utilisateur authentifié
       produces:
         - application/json
       responses:
         '200':
-          description: Transactions retrieved successfully
+          description: Transactions récupérées avec succès
           schema:
             $ref: '#/definitions/TransactionsList'
         '401':
-          description: Unauthorized - Invalid or missing token
+          description: Non autorisé - Jeton invalide ou manquant
         '500':
-          description: Internal Server Error
+          description: Erreur interne du serveur
   /transactions/{transactionId}:
     get:
       security:
         - Bearer: []
       tags:
-        - Transaction Module
-      summary: Get Transaction Details
-      description: Retrieve details of a specific transaction
+        - Module Transaction
+      summary: Obtenir les détails d'une transaction
+      description: Récupère les détails d'une transaction spécifique
       parameters:
         - name: transactionId
           in: path
-          description: ID of the transaction to retrieve
+          description: ID de la transaction à récupérer
           required: true
           type: string
       produces:
         - application/json
       responses:
         '200':
-          description: Transaction details retrieved successfully
+          description: Détails de la transaction récupérés avec succès
           schema:
             $ref: '#/definitions/Transaction'
         '401':
-          description: Unauthorized - Invalid or missing token
+          description: Non autorisé - Jeton invalide ou manquant
         '404':
-          description: Transaction not found
+          description: Transaction non trouvée
         '500':
-          description: Internal Server Error
-    put:
-      security:
-        - Bearer: []
-      tags:
-        - Transaction Module
-      summary: Update Transaction
-      description: Update all fields of a specific transaction
-      parameters:
-        - name: transactionId
-          in: path
-          description: ID of the transaction to update
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Updated transaction information
-          required: true
-          schema:
-            $ref: '#/definitions/TransactionUpdate'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Transaction updated successfully
-          schema:
-            $ref: '#/definitions/Transaction'
-        '400':
-          description: Invalid Fields
-        '401':
-          description: Unauthorized - Invalid or missing token
-        '404':
-          description: Transaction not found
-        '500':
-          description: Internal Server Error
+          description: Erreur interne du serveur
     patch:
       security:
         - Bearer: []
       tags:
-        - Transaction Module
-      summary: Partially Update Transaction
-      description: Update specific fields of a transaction (e.g., category or note)
+        - Module Transaction
+      summary: Mise à jour partielle de la transaction
+      description: Met à jour des champs spécifiques d'une transaction (par exemple, catégorie ou note)
       parameters:
         - name: transactionId
           in: path
-          description: ID of the transaction to update
+          description: ID de la transaction à mettre à jour
           required: true
           type: string
         - in: body
           name: body
-          description: Fields to update
+          description: Champs à mettre à jour
           required: true
           schema:
             $ref: '#/definitions/TransactionPartialUpdate'
@@ -182,41 +148,17 @@ paths:
         - application/json
       responses:
         '200':
-          description: Transaction partially updated successfully
+          description: Transaction partiellement mise à jour avec succès
           schema:
             $ref: '#/definitions/Transaction'
         '400':
-          description: Invalid Fields
+          description: Champs invalides
         '401':
-          description: Unauthorized - Invalid or missing token
+          description: Non autorisé - Jeton invalide ou manquant
         '404':
-          description: Transaction not found
+          description: Transaction non trouvée
         '500':
-          description: Internal Server Error
-    delete:
-      security:
-        - Bearer: []
-      tags:
-        - Transaction Module
-      summary: Delete Transaction
-      description: Delete a specific transaction
-      parameters:
-        - name: transactionId
-          in: path
-          description: ID of the transaction to delete
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '204':
-          description: Transaction deleted successfully
-        '401':
-          description: Unauthorized - Invalid or missing token
-        '404':
-          description: Transaction not found
-        '500':
-          description: Internal Server Error
+          description: Erreur interne du serveur
 
 securityDefinitions:
   Bearer:
