@@ -9,7 +9,6 @@ import Footer from './components/Layout/Footer';
 import Header from './components/Layout/Header';
 import NotFound from './components/NotFound';
 import SwaggerUIComponent from './components/SwaggerUI';
-import TransactionList from './components/Transaction/TransactionList';
 import User from './components/User';
 import { setUser } from './store/userSlice';
 
@@ -58,14 +57,6 @@ export default function App() {
 							element={
 								<ProtectedRoute>
 									<User />
-								</ProtectedRoute>
-							}
-						/>
-						<Route
-							path="/transactions"
-							element={
-								<ProtectedRoute>
-									<TransactionList />
 								</ProtectedRoute>
 							}
 						/>
