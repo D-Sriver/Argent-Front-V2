@@ -266,7 +266,6 @@ body {
 
 .transaction-button {
 	display: block;
-	width: 100%;
 	padding: 8px;
 	font-size: 1.1rem;
 	font-weight: bold;
@@ -288,4 +287,80 @@ body {
 	.transaction-button {
 		width: 200px;
 	}
+}
+
+.edit-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.edit-form-inputs {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-bottom: 1rem;
+}
+
+.edit-form-inputs input {
+	margin: 0 5px;
+	padding: 8px;
+	font-size: 1em;
+	border: 1px solid #ccc;
+	width: calc(50% - 10px);
+	max-width: 200px;
+}
+
+.edit-form-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	width: 100%;
+}
+
+.edit-form-buttons button {
+	border-color: #00bc77;
+	background-color: #00bc77;
+	color: #fff;
+	font-weight: bold;
+	padding: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	width: calc(25% - 5px);
+	max-width: 100px;
+}
+
+.edit-form-buttons button[type='submit'] {
+	background-color: #00bc77;
+}
+
+.edit-form-buttons button[type='submit']:hover {
+	background-color: #009966;
+}
+
+.edit-form-buttons button[type='button'] {
+	border-color: #ccc;
+	background-color: #ccc;
+	color: #222;
+}
+
+.edit-form-buttons button:hover {
+	border-color: #009966;
+	background-color: #009966;
+}
+
+.edit-form-buttons button[type='button']:hover {
+	border-color: #999;
+	background-color: #999;
+}
+
+.header h1 {
+	padding-top: 2rem;
+	font-size: 2rem;
+	margin-bottom: 0;
+}
+
+.user-name {
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 8px;
 }
