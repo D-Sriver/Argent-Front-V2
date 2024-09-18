@@ -53,24 +53,6 @@ export const fetchUserData = async (email: string, password: string) => {
 	}
 };
 
-export const updateUserData = async (
-	token: string,
-	userData: {
-		firstName: string;
-		lastName: string;
-	}
-) => {
-	try {
-		const response = await api.put('/user/profile', userData, {
-			headers: { Authorization: `Bearer ${token}` },
-		});
-		return response.data;
-	} catch (error) {
-		console.error('Error updating profile:', error);
-		throw error;
-	}
-};
-
 export const updateUserProfile = async (
 	token: string,
 	firstName: string,
