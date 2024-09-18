@@ -13,10 +13,8 @@ export default function Header() {
 
 	const handleLogout = () => {
 		dispatch(clearUser());
+		sessionStorage.removeItem('userToken');
 		localStorage.removeItem('userEmail');
-		localStorage.removeItem('userPassword');
-		localStorage.removeItem('userFirstName');
-		localStorage.removeItem('userLastName');
 		setIsMenuOpen(false);
 	};
 

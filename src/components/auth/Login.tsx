@@ -43,14 +43,11 @@ export default function Login() {
 						email: userData.email,
 					})
 				);
-				// Stockez le token dans le localStorage
-				localStorage.setItem('userToken', userData.body.token);
+				sessionStorage.setItem('userToken', userData.body.token);
 				if (rememberMe) {
 					localStorage.setItem('userEmail', email);
-					localStorage.setItem('userPassword', password);
 				} else {
 					localStorage.removeItem('userEmail');
-					localStorage.removeItem('userPassword');
 				}
 				navigate('/profile');
 			} catch (error) {
