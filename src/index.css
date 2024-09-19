@@ -14,6 +14,8 @@ body {
 }
 
 .main {
+	display: flex;
+	flex-direction: column;
 	flex: 1;
 }
 
@@ -42,22 +44,58 @@ body {
 	padding: 5px 20px;
 }
 
-.main-nav a {
-	font-weight: bold;
-	color: #2c3e50;
-}
-
-.main-nav a.router-link-exact-active {
-	color: #42b983;
+.main-nav-item-block {
+	display: flex;
+	padding: 1rem;
+	gap: 1rem;
 }
 
 .main-nav-item {
 	text-decoration: none;
 	margin-right: 0.5rem;
+	transition: color 0.3s ease;
+	display: flex;
+	align-items: center;
 }
 
 .main-nav-item:hover {
-	text-decoration: underline;
+	color: #00bc77;
+}
+
+.main-nav-item i {
+	margin-right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+	.main-nav {
+		align-items: center;
+	}
+
+	.main-nav-item-block {
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.main-nav-item {
+		margin-bottom: 0.5rem;
+		width: 100%;
+		justify-content: flex-start;
+		text-wrap: nowrap;
+	}
+}
+
+.main-nav a {
+	font-weight: bold;
+	color: #2c3e50;
+	transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+	color: #00bc77;
+}
+
+.main-nav a.router-link-exact-active {
+	color: #42b983;
 }
 
 .main-nav-logo {
@@ -77,6 +115,7 @@ body {
 	background-repeat: no-repeat;
 	height: 300px;
 	position: relative;
+	transition: height 0.3s ease;
 }
 
 .hero-content {
@@ -139,6 +178,7 @@ body {
 	border: 10px solid #00bc77;
 	border-radius: 50%;
 	padding: 1rem;
+	transition: transform 0.3s ease;
 }
 
 .feature-item {
@@ -163,6 +203,12 @@ body {
 	border-color: #00bc77;
 	background-color: #00bc77;
 	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.sign-in-button:hover {
+	background-color: #009966;
 }
 
 .sign-in-content {
@@ -257,6 +303,12 @@ body {
 	color: #fff;
 	font-weight: bold;
 	padding: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+	background-color: #009966;
 }
 
 .header {
@@ -273,6 +325,15 @@ body {
 	border-color: #00bc77;
 	background-color: #00bc77;
 	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+
+	&:hover {
+		background-color: #009966;
+	}
+	&:active {
+		border-style: inset;
+	}
 }
 
 @media (min-width: 720px) {
@@ -308,6 +369,19 @@ body {
 	border: 1px solid #ccc;
 	width: calc(50% - 10px);
 	max-width: 200px;
+}
+
+@media (max-width: 768px) {
+	.edit-form-inputs {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.edit-form-inputs input {
+		width: 100%;
+		max-width: 300px;
+		margin: 5px 0;
+	}
 }
 
 .edit-form-buttons {
@@ -354,7 +428,6 @@ body {
 }
 
 .header h1 {
-	padding-top: 2rem;
 	font-size: 2rem;
 	margin-bottom: 0;
 }
