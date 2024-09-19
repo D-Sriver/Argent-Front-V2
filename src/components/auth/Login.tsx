@@ -1,3 +1,5 @@
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -59,7 +61,9 @@ export default function Login() {
 	return (
 		<main className="main bg-dark">
 			<section className="sign-in-content">
-				<i className="fa fa-user-circle sign-in-icon"></i>
+				<i className="fa fa-user-circle sign-in-icon">
+					<FontAwesomeIcon icon={faUserCircle} />
+				</i>
 				<h1>Login</h1>
 				<form onSubmit={handleSignIn}>
 					<div className="input-wrapper">

@@ -1,3 +1,5 @@
+import { faSignOut, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store/store';
@@ -29,17 +31,17 @@ export default function Header() {
 				{isAuthenticated ? (
 					<>
 						<Link className="main-nav-item" to="/profile">
-							<i className="fa fa-user-circle"></i>
+							<FontAwesomeIcon icon={faUserCircle} />
 							<span>{firstName}</span>
 						</Link>
 						<Link className="main-nav-item" to="/" onClick={handleLogout}>
-							<i className="fa fa-sign-out"></i>
+							<FontAwesomeIcon icon={faSignOut} />
 							<span>Sign Out</span>
 						</Link>
 					</>
 				) : (
 					<Link className="main-nav-item" to="/Login">
-						<i className="fa fa-user-circle"></i>
+						<FontAwesomeIcon icon={faUserCircle} />
 						<span>Login</span>
 					</Link>
 				)}
