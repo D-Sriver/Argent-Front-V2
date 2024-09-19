@@ -22,22 +22,30 @@ const UserHeader: React.FC<UserHeaderProps> = ({ firstName, lastName }) => {
 
 	const handleSave = async () => {
 		try {
-			const token = localStorage.getItem('userToken');
+			const token = sessionStorage.getItem('userToken');
 			if (!token) {
 				console.error("Token d'authentification manquant");
 				return;
 			}
-			await updateUserProfile(token, editedFirstName, editedLastName);
-			dispatch(
-				setUser({
-					firstName: editedFirstName,
-					lastName: editedLastName,
-					email: localStorage.getItem('userEmail') || '',
-				})
+			const updatedUserData = await updateUserProfile(
+				token,
+				editedFirstName,
+				editedLastName
 			);
-			localStorage.setItem('userFirstName', editedFirstName);
-			localStorage.setItem('userLastName', editedLastName);
-			setIsEditing(false);
+			if (updatedUserData.status === 200) {
+				dispatch(
+					setUser({
+						firstName: editedFirstName,
+						lastName: editedLastName,
+						email: updatedUserData.body.email,
+					})
+				);
+				sessionStorage.setItem('userFirstName', editedFirstName);
+				sessionStorage.setItem('userLastName', editedLastName);
+				setIsEditing(false);
+			} else {
+				throw new Error('La mise à jour a échoué');
+			}
 		} catch (error) {
 			console.error(
 				'Erreur lors de la mise à jour des données utilisateur:',
@@ -83,7 +91,7 @@ const UserHeader: React.FC<UserHeaderProps> = ({ firstName, lastName }) => {
 			) : (
 				<>
 					<div className="user-name">
-						{firstName} {lastName}
+						{firstName} {lastName} !
 					</div>
 					<button className="edit-button" onClick={handleEdit}>
 						Edit Name
