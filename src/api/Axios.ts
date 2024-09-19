@@ -72,3 +72,11 @@ export const updateUserProfile = async (
 		throw error;
 	}
 };
+
+api.interceptors.response.use(
+	(response) => response,
+	(error) => {
+		console.error('Erreur API:', error.response?.data || error.message);
+		return Promise.reject(error);
+	}
+);
