@@ -16,10 +16,8 @@ export default function Login() {
 
 	useEffect(() => {
 		const savedEmail = localStorage.getItem('userEmail');
-		const savedPassword = localStorage.getItem('userPassword');
-		if (savedEmail && savedPassword) {
+		if (savedEmail) {
 			setEmail(savedEmail);
-			setPassword(savedPassword);
 			setRememberMe(true);
 		}
 	}, []);
@@ -72,6 +70,8 @@ export default function Login() {
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							autoComplete="username"
+							aria-label="Email address"
+							aria-required="true"
 						/>
 						{emailError && <p className="error-message">{emailError}</p>}
 					</div>
