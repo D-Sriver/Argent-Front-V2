@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store/store';
@@ -9,17 +8,11 @@ export default function Header() {
 	const { firstName, isAuthenticated } = useSelector(
 		(state: RootState) => state.user
 	);
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const handleLogout = () => {
 		dispatch(clearUser());
 		sessionStorage.removeItem('userToken');
 		localStorage.removeItem('userEmail');
-		setIsMenuOpen(false);
-	};
-
-	const toggleMenu = () => {
-		setIsMenuOpen(!isMenuOpen);
 	};
 
 	return (
@@ -32,33 +25,22 @@ export default function Header() {
 				/>
 				<h1 className="sr-only">Argent Bank</h1>
 			</Link>
-			<div className="burger-menu" onClick={toggleMenu}>
-				<i className="fas fa-bars"></i>
-			</div>
-			<div className={`main-nav-item-block ${isMenuOpen ? 'open' : ''}`}>
+			<div className="main-nav-item-block">
 				{isAuthenticated ? (
 					<>
-						<Link
-							className="main-nav-item"
-							to="/profile"
-							onClick={() => setIsMenuOpen(false)}
-						>
+						<Link className="main-nav-item" to="/profile">
 							<i className="fa fa-user-circle"></i>
-							{firstName}
+							<span>{firstName}</span>
 						</Link>
 						<Link className="main-nav-item" to="/" onClick={handleLogout}>
 							<i className="fa fa-sign-out"></i>
-							Sign Out
+							<span>Sign Out</span>
 						</Link>
 					</>
 				) : (
-					<Link
-						className="main-nav-item"
-						to="/Login"
-						onClick={() => setIsMenuOpen(false)}
-					>
+					<Link className="main-nav-item" to="/Login">
 						<i className="fa fa-user-circle"></i>
-						Login
+						<span>Login</span>
 					</Link>
 				)}
 			</div>
