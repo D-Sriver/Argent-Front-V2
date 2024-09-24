@@ -5,10 +5,14 @@
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="description" content="Projet de gestion de compte bancaire" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="Cache-Control" content="max-age=31536000, public" />
 		<title>Vite + React + TS</title>
+		<!-- Précharger les ressources critiques -->
+		<link rel="preload" href="/src/main.tsx" as="script" />
 	</head>
 	<body>
 		<div id="root"></div>
-		<script type="module" src="/src/main.tsx"></script>
+		<!-- Utiliser defer pour éviter le blocage du rendu -->
+		<script type="module" src="/src/main.tsx" defer></script>
 	</body>
 </html>

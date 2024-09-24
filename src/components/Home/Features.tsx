@@ -17,19 +17,19 @@ function FeatureItem({ iconSrc, title, description }: FeatureProps) {
 export default function Features() {
 	const features = [
 		{
-			iconSrc: './img/icon-chat.png',
+			iconSrc: './img/icon-chat.avif',
 			title: 'You are our #1 priority',
 			description:
 				'Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes.',
 		},
 		{
-			iconSrc: './img/icon-money.png',
+			iconSrc: './img/icon-money.avif',
 			title: 'More savings means higher rates',
 			description:
 				'The more you save with us, the higher your interest rate will be!',
 		},
 		{
-			iconSrc: './img/icon-security.png',
+			iconSrc: './img/icon-security.avif',
 			title: 'Security you can trust',
 			description:
 				'We use top of the line encryption to make sure your data and money is always safe.',
