@@ -1,10 +1,5 @@
 import React from 'react';
-
-interface AccountSectionProps {
-	title: string;
-	amount: number;
-	description: string;
-}
+import { AccountSectionProps } from '../types/Account.types';
 
 const AccountSection: React.FC<AccountSectionProps> = ({
 	title,
@@ -19,7 +14,6 @@ const AccountSection: React.FC<AccountSectionProps> = ({
 				<p className="account-amount-description">{description}</p>
 			</div>
 			<div className="account-content-wrapper cta">
-				{/* Vous pouvez supprimer ce bouton ou le désactiver */}
 				<button className="transaction-button" disabled>
 					View transactions
 				</button>

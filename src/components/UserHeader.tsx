@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateUserProfile } from '../api/Axios';
 import { setUser } from '../store/userSlice';
-
-interface UserHeaderProps {
-	firstName: string;
-	lastName: string;
-}
+import { UserHeaderProps } from '../types/User.types';
 
 const UserHeader: React.FC<UserHeaderProps> = ({ firstName, lastName }) => {
 	const dispatch = useDispatch();

@@ -1,8 +1,4 @@
-interface FeatureProps {
-	iconSrc: string;
-	title: string;
-	description: string;
-}
+import { Feature, FeatureProps } from '../../types/Features.types';
 
 function FeatureItem({ iconSrc, title, description }: FeatureProps) {
 	return (
@@ -15,7 +11,7 @@ function FeatureItem({ iconSrc, title, description }: FeatureProps) {
 }
 
 export default function Features() {
-	const features = [
+	const features: Feature[] = [
 		{
 			iconSrc: './img/icon-chat.avif',
 			title: 'You are our #1 priority',

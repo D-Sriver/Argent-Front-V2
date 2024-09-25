@@ -4,10 +4,7 @@ import { Navigate } from 'react-router-dom';
 import { getUserProfile } from '../../api/Axios';
 import { RootState } from '../../store/store';
 import { setUser } from '../../store/userSlice';
-
-interface ProtectedRouteProps {
-	children: React.ReactNode;
-}
+import { ProtectedRouteProps } from '../../types/ProtectedRouter.types';
 
 // crée un composant pour protéger les routes qui ne sont accessibles que si l'utilisateur est authentifié
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {

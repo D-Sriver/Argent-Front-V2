@@ -3,3 +3,8 @@ export interface Account {
 	amount: number;
 	description: string;
 }
+
+export interface UserHeaderProps {
+	firstName: string;
+	lastName: string;
+}
