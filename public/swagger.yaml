@@ -86,7 +86,14 @@ paths:
       tags:
         - Module Transaction
       summary: Liste des transactions de l'utilisateur
-      description: Récupère une liste des transactions pour l'utilisateur authentifié
+      description: Récupère une liste des transactions groupée par compte du mois en cours
+      parameters:
+        - name: date
+          in: query
+          description: Date pour le mois en cours au format YYYY-MM
+          required: false
+          type: string
+          format: date
       produces:
         - application/json
       responses:
@@ -205,6 +212,8 @@ definitions:
     type: object
     properties:
       id:
+        type: string
+      accountId:
         type: string
       date:
         type: string
