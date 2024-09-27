@@ -13,10 +13,16 @@ body {
 	min-height: 100vh;
 }
 
-.main {
+.app {
 	display: flex;
 	flex-direction: column;
-	flex: 1;
+	min-height: 100vh;
+}
+
+main {
+	flex: 1 0 auto;
+	display: flex;
+	flex-direction: column;
 }
 
 .bg-dark {
