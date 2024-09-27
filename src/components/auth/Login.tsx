@@ -17,6 +17,10 @@ export default function Login() {
 	const [rememberMe, setRememberMe] = useState(false);
 
 	useEffect(() => {
+		const userToken = sessionStorage.getItem('userToken');
+		if (userToken) {
+			return navigate('/profile');
+		}
 		const savedEmail = localStorage.getItem('userEmail');
 		if (savedEmail) {
 			setEmail(savedEmail);
